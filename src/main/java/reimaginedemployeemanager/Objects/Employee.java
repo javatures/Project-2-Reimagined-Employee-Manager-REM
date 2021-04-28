@@ -31,7 +31,18 @@ public class Employee {
     @Column(name = "employee_type_id")
     private int employeeTypeID;
 
+    @Column(name = "manager_id")
+    private long managerID;
+
     
+    public long getManagerID() {
+        return managerID;
+    }
+
+    public void setManagerID(long managerID) {
+        this.managerID = managerID;
+    }
+
     public long getEmployeeID() {
         return employeeID;
     }
