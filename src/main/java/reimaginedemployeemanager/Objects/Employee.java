@@ -17,7 +17,7 @@ public class Employee {
     private long employeeID;
 
     @Column(name = "first_name")
-    private String fristName;
+    private String firstName;
 
     @Column(name = "last_name")
     private String lastName;
@@ -51,12 +51,12 @@ public class Employee {
         this.employeeID = employeeID;
     }
 
-    public String getFristName() {
-        return fristName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFristName(String fristName) {
-        this.fristName = fristName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
