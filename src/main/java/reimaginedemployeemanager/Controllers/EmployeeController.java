@@ -31,6 +31,7 @@ public class EmployeeController {
     public void createEmployeeAccount (@RequestBody Employee employee) {
 
         employeeRepository.save(employee);
+        System.out.println(employee.toString());
 
     }
 
@@ -70,12 +71,14 @@ public class EmployeeController {
 	@ResponseBody
 	public ResponseEntity<Optional<Employee>> employeeLogin(@RequestBody Employee employee) 
 	{
-		Optional<Employee> employeeDatabase = employeeRepository.findById(employee.getEmployeeID());
+		Optional<Employee> employeeDatabase = employeeRepository.findByEmail(employee.getEmail());
 		
 		if(employeeDatabase.isPresent() && employeeDatabase.get().getPassword().equals(employee.getPassword()) && employeeDatabase.get().getEmail().equals(employee.getEmail()))
 			return new ResponseEntity<>(employeeDatabase, HttpStatus.OK);
 		
 		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-		}
+	}
     
 }
+
+

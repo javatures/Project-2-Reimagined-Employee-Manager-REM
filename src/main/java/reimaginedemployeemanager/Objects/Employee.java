@@ -11,6 +11,9 @@ import javax.persistence.Table;
 @Table(name = "employee")
 public class Employee {
 
+    @Column(name = "email", unique = true)
+    private String email;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "employee_id")
@@ -21,9 +24,6 @@ public class Employee {
 
     @Column(name = "last_name")
     private String lastName;
-
-    @Column(name = "email")
-    private String email;
 
     @Column(name = "password")
     private String password;
@@ -88,6 +88,13 @@ public class Employee {
 
     public void setEmployeeTypeID(int employeeTypeID) {
         this.employeeTypeID = employeeTypeID;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee [email=" + email + ", employeeID=" + employeeID + ", employeeTypeID=" + employeeTypeID
+                + ", firstName=" + firstName + ", lastName=" + lastName + ", managerID=" + managerID + ", password="
+                + password + "]";
     }
 
     
