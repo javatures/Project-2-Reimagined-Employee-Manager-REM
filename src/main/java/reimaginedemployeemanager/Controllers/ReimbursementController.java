@@ -54,4 +54,12 @@ public class ReimbursementController {
 
     }
     
+    @RequestMapping(value = "/listReimbursementsByEmployee",
+                    produces = MediaType.APPLICATION_JSON_VALUE,
+                    method = RequestMethod.GET)
+    public ResponseEntity<List<Reimbursement>> listReimbursementsByEmployee (long employeeID) {
+
+        return new ResponseEntity<>(reimbursementRepository.findByEmployeeID(employeeID), HttpStatus.OK);
+
+    }
 }
