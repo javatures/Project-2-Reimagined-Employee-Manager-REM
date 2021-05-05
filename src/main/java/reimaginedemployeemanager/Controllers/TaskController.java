@@ -62,5 +62,14 @@ public class TaskController {
         return new ResponseEntity<>(taskRepository.findAll(), HttpStatus.OK);
 
     }
+
+    @RequestMapping(value = "/listTasksByEmployee",
+                    produces = MediaType.APPLICATION_JSON_VALUE,
+                    method = RequestMethod.GET)
+    public ResponseEntity<List<Task>> listTasksByEmployee (long employeeID) {
+
+        return new ResponseEntity<>(taskRepository.findAllByEmployeeID(employeeID), HttpStatus.OK);
+
+    }
     
 }
