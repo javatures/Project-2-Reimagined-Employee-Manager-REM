@@ -31,6 +31,18 @@ public class Reimbursement {
     @Column(name = "approval_date")
     private String approvalDate;
 
+    @Column(name = "employee_id")
+    private long employeeID;
+  
+
+    public long getEmployeeID() {
+        return employeeID;
+    }
+
+    public void setEmployeeID(long employeeID) {
+        this.employeeID = employeeID;
+    }
+
     public long getReimbursementID() {
         return reimbursementID;
     }
