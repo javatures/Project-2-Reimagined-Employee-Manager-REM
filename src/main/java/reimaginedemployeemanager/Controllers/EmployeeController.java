@@ -45,6 +45,49 @@ public class EmployeeController {
 
     }
 
+    @RequestMapping(value="/updateEmployee", 
+			consumes=MediaType.APPLICATION_JSON_VALUE, 
+			produces=MediaType.APPLICATION_JSON_VALUE, 
+			method=RequestMethod.POST)
+	public void updateEmployee(@RequestBody Employee employee)
+	{
+        Optional<Employee> updateEmploye = employeeRepository.findById(employee.getEmployeeID());
+		
+        if (updateEmploye.isPresent()) {
+            if(employee.getEmail() != null || employee.getEmail() != "" || employee.getEmail().isBlank() != true)
+                updateEmploye.get().setEmail(employee.getEmail());
+            if(employee.getFirstName() != null || employee.getFirstName() != "" || employee.getFirstName().isBlank() != true)
+                updateEmploye.get().setFirstName(employee.getFirstName());
+            if(employee.getLastName() != null || employee.getLastName() != "" || employee.getLastName().isBlank() != true)
+                updateEmploye.get().setLastName(employee.getLastName());
+            if(employee.getPassword() != null || employee.getPassword() != "" || employee.getPassword().isBlank() != true)
+                updateEmploye.get().setPassword(employee.getPassword());
+            
+            employee = updateEmploye.get();
+
+            employeeRepository.save(employee);
+        }
+	}
+
+    @RequestMapping(value="/updateEmployeeManager", 
+			consumes=MediaType.APPLICATION_JSON_VALUE, 
+			produces=MediaType.APPLICATION_JSON_VALUE, 
+			method=RequestMethod.POST)
+	public void updateEmployeeManager(@RequestBody Employee employee)
+	{
+        Optional<Employee> updateEmploye = employeeRepository.findById(employee.getEmployeeID());
+
+        if (updateEmploye.isPresent()) {
+            updateEmploye.get().setEmployeeID(employee.getEmployeeID());
+            updateEmploye.get().setManagerID(employee.getManagerID());
+
+            employee = updateEmploye.get();
+
+            employeeRepository.save(employee);
+        }
+
+	}
+
     @RequestMapping(value = "/findEmployee",
                     produces = MediaType.APPLICATION_JSON_VALUE,
                     method = RequestMethod.GET)
