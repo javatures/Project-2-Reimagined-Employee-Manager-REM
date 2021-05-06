@@ -38,9 +38,9 @@ public class VibeController {
                     consumes = MediaType.APPLICATION_JSON_VALUE,
                     produces = MediaType.APPLICATION_JSON_VALUE,
                     method = RequestMethod.POST)
-    public void deleteVibe (@RequestBody long vibeID) {
+    public void deleteVibe (@RequestBody Vibe vibe) {
 
-        vibeRepository.deleteById(vibeID);
+        vibeRepository.deleteById(vibe.getVibeID());
 
     }
 

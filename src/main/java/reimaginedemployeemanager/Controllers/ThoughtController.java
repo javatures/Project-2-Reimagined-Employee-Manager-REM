@@ -38,9 +38,9 @@ public class ThoughtController {
                     consumes = MediaType.APPLICATION_JSON_VALUE,
                     produces = MediaType.APPLICATION_JSON_VALUE,
                     method = RequestMethod.POST)
-    public void deleteThought (@RequestBody long thoughtID) {
+    public void deleteThought (@RequestBody Thought thought) {
 
-        thoughtRepository.deleteById(thoughtID);
+        thoughtRepository.deleteById(thought.getThoughtID());
 
     }
 
