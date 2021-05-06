@@ -44,6 +44,27 @@ public class VibeController {
 
     }
 
+    @RequestMapping(value="/updateVibe",
+                    consumes=MediaType.APPLICATION_JSON_VALUE,
+                    produces=MediaType.APPLICATION_JSON_VALUE,
+                    method=RequestMethod.POST)
+    public void updateVibe(@RequestBody Vibe vibe) {
+        Optional<Vibe> updateVibe = vibeRepository.findById(vibe.getEmployeeID());
+
+        if(updateVibe.isPresent()) {
+            if(vibe.getVibePurpose() != null && vibe.getVibePurpose() != "" && vibe.getVibePurpose().isBlank() != true)
+                updateVibe.get().setVibePurpose(vibe.getVibePurpose());
+            if(vibe.getVibeTLDR() != null && vibe.getVibeTLDR() != "" && vibe.getVibeTLDR().isBlank() != true)
+            updateVibe.get().setVibeTLDR(vibe.getVibeTLDR());
+            if(vibe.getVibee() != null && vibe.getVibee() != "" && vibe.getVibee().isBlank() != true)
+            updateVibe.get().setVibee(vibe.getVibee());
+
+            vibe = updateVibe.get();
+
+            vibeRepository.save(vibe);
+        }
+    }
+
     @RequestMapping(value = "/getVibe",
                     produces = MediaType.APPLICATION_JSON_VALUE,
                     method = RequestMethod.GET)
