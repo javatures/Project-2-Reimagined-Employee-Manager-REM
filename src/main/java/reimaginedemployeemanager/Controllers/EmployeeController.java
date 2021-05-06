@@ -108,6 +108,16 @@ public class EmployeeController {
 
     }
 
+    @RequestMapping(value = "/listEmployeesByManager",
+                    produces = MediaType.APPLICATION_JSON_VALUE,
+                    method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<List<Employee>> listEmployeesByManager (Employee employee) {
+
+        return new ResponseEntity<>(employeeRepository.findAllByManagerID(employee.getEmployeeID()), HttpStatus.OK);
+
+    }
+
     @RequestMapping(value="/employeeLogin",
                     consumes=MediaType.APPLICATION_JSON_VALUE,
                     produces=MediaType.APPLICATION_JSON_VALUE,
