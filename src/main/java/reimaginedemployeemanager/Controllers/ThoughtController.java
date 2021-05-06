@@ -71,5 +71,5 @@ public class ThoughtController {
         System.out.println(thoughtRepository.findAllByEmployeeID(employeeID).toString());
         return new ResponseEntity<>(thoughtRepository.findAllByEmployeeID(employeeID), HttpStatus.OK);
     }
-    
+
 }
