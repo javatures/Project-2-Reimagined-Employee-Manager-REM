@@ -57,6 +57,7 @@ public class TaskController {
     @RequestMapping(value = "/listTasks",
                     produces = MediaType.APPLICATION_JSON_VALUE,
                     method = RequestMethod.GET)
+    @ResponseBody
     public ResponseEntity<List<Task>> listTasks () {
 
         return new ResponseEntity<>(taskRepository.findAll(), HttpStatus.OK);
@@ -66,8 +67,10 @@ public class TaskController {
     @RequestMapping(value = "/listTasksByEmployee",
                     produces = MediaType.APPLICATION_JSON_VALUE,
                     method = RequestMethod.GET)
+    @ResponseBody
     public ResponseEntity<List<Task>> listTasksByEmployee (long employeeID) {
 
+        System.out.println(taskRepository.findAllByEmployeeID(employeeID).toString());
         return new ResponseEntity<>(taskRepository.findAllByEmployeeID(employeeID), HttpStatus.OK);
 
     }

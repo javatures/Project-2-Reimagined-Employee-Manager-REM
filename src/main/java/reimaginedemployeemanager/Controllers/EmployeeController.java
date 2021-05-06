@@ -58,6 +58,7 @@ public class EmployeeController {
     @RequestMapping(value = "/listEmployees",
                     produces = MediaType.APPLICATION_JSON_VALUE,
                     method = RequestMethod.GET)
+    @ResponseBody
     public ResponseEntity<List<Employee>> listEmployees () {
 
         return new ResponseEntity<>(employeeRepository.findAll(), HttpStatus.OK);

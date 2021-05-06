@@ -66,6 +66,13 @@ public class Task {
 
     public void setEmployeeID(long employeeID) {
         this.employeeID = employeeID;
+    }
+
+    @Override
+    public String toString() {
+        return "Task [employeeID=" + employeeID + ", taskDescription=" + taskDescription + ", taskDueDate="
+                + taskDueDate + ", taskID=" + taskID + ", taskName=" + taskName + "]";
     }    
+
     
 }
