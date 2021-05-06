@@ -38,9 +38,9 @@ public class ThoughtController {
                     consumes = MediaType.APPLICATION_JSON_VALUE,
                     produces = MediaType.APPLICATION_JSON_VALUE,
                     method = RequestMethod.POST)
-    public void deleteThought (@RequestBody long thoughtID) {
+    public void deleteThought (@RequestBody Thought thought) {
 
-        thoughtRepository.deleteById(thoughtID);
+        thoughtRepository.deleteById(thought.getThoughtID());
 
     }
 
@@ -62,5 +62,14 @@ public class ThoughtController {
         return new ResponseEntity<>(thoughtRepository.findAll(), HttpStatus.OK);
 
     }
-    
+
+    @RequestMapping(value = "/listThoughtsByEmployee",
+                    produces = MediaType.APPLICATION_JSON_VALUE,
+                    method = RequestMethod.GET)
+    public ResponseEntity<List<Thought>> listThoughtsByEmployee (long employeeID) {
+
+        System.out.println(thoughtRepository.findAllByEmployeeID(employeeID).toString());
+        return new ResponseEntity<>(thoughtRepository.findAllByEmployeeID(employeeID), HttpStatus.OK);
+    }
+
 }

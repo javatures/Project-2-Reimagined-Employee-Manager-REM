@@ -25,6 +25,17 @@ public class Vibe {
     @Column(name = "employee_id")
     private long employeeID;
 
+    @Column(name = "vibee")
+    private String vibee;
+
+    public String getVibee() {
+        return vibee;
+    }
+
+    public void setVibee(String vibee) {
+        this.vibee = vibee;
+    }
+
     public long getVibeID() {
         return vibeID;
     }
@@ -56,5 +67,5 @@ public class Vibe {
     public void setEmployeeID(long employeeID) {
         this.employeeID = employeeID;
     }
-    
+
 }

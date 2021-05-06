@@ -1,5 +1,8 @@
 package reimaginedemployeemanager.Controllers;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,9 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import reimaginedemployeemanager.Objects.Vibe;
 import reimaginedemployeemanager.Repositories.VibeRepository;
-
-import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -38,10 +38,31 @@ public class VibeController {
                     consumes = MediaType.APPLICATION_JSON_VALUE,
                     produces = MediaType.APPLICATION_JSON_VALUE,
                     method = RequestMethod.POST)
-    public void deleteVibe (@RequestBody long vibeID) {
+    public void deleteVibe (@RequestBody Vibe vibe) {
 
-        vibeRepository.deleteById(vibeID);
+        vibeRepository.deleteById(vibe.getVibeID());
 
+    }
+
+    @RequestMapping(value="/updateVibe",
+                    consumes=MediaType.APPLICATION_JSON_VALUE,
+                    produces=MediaType.APPLICATION_JSON_VALUE,
+                    method=RequestMethod.POST)
+    public void updateVibe(@RequestBody Vibe vibe) {
+        Optional<Vibe> updateVibe = vibeRepository.findById(vibe.getEmployeeID());
+
+        if(updateVibe.isPresent()) {
+            if(vibe.getVibePurpose() != null && vibe.getVibePurpose() != "" && vibe.getVibePurpose().isBlank() != true)
+                updateVibe.get().setVibePurpose(vibe.getVibePurpose());
+            if(vibe.getVibeTLDR() != null && vibe.getVibeTLDR() != "" && vibe.getVibeTLDR().isBlank() != true)
+            updateVibe.get().setVibeTLDR(vibe.getVibeTLDR());
+            if(vibe.getVibee() != null && vibe.getVibee() != "" && vibe.getVibee().isBlank() != true)
+            updateVibe.get().setVibee(vibe.getVibee());
+
+            vibe = updateVibe.get();
+
+            vibeRepository.save(vibe);
+        }
     }
 
     @RequestMapping(value = "/getVibe",
@@ -61,6 +82,21 @@ public class VibeController {
 
         return new ResponseEntity<>(vibeRepository.findAll(), HttpStatus.OK);
 
+    }
+
+    /**
+     * Performs GET request from endpoint /listVibesByEmployee to retrieve a ResponseEntity that is a List of type Vibe. It is passed an employeeID in order to execute findAllByEmployeeID() from the Vibe Repository, which returns an HttpStatus of OK.
+     * 
+     * @param employeeID
+     * @return
+     */
+    @RequestMapping(value = "/listVibesByEmployee",
+                    produces = MediaType.APPLICATION_JSON_VALUE,
+                    method = RequestMethod.GET)
+    public ResponseEntity<List<Vibe>> listVibesByEmployee(long employeeID) {
+
+        System.out.println(vibeRepository.findAllByEmployeeID(employeeID).toString());
+        return new ResponseEntity<>(vibeRepository.findAllByEmployeeID(employeeID), HttpStatus.OK);
     }
     
 }

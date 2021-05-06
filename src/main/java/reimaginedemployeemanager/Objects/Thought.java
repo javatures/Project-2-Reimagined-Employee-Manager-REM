@@ -28,6 +28,17 @@ public class Thought {
     @Column(name = "thought_frame")
     private String thoughtFrame;
 
+    @Column(name = "employee_id")
+    private long employeeID;
+
+    public long getEmployeeID() {
+        return employeeID;
+    }
+
+    public void setEmployeeID(long employeeID) {
+        this.employeeID = employeeID;
+    }
+
     public long getThoughtID() {
         return thoughtID;
     }
