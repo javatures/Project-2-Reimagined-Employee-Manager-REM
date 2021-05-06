@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -61,6 +62,21 @@ public class VibeController {
 
         return new ResponseEntity<>(vibeRepository.findAll(), HttpStatus.OK);
 
+    }
+
+    /**
+     * Performs GET request from endpoint /listVibesByEmployee to retrieve a ResponseEntity that is a List of type Vibe. It is passed an employeeID in order to execute findAllByEmployeeID() from the Vibe Repository, which returns an HttpStatus of OK.
+     * 
+     * @param employeeID
+     * @return
+     */
+    @RequestMapping(value = "/listVibesByEmployee",
+                    produces = MediaType.APPLICATION_JSON_VALUE,
+                    method = RequestMethod.GET)
+    public ResponseEntity<List<Vibe>> listVibesByEmployee(long employeeID) {
+
+        System.out.println(vibeRepository.findAllByEmployeeID(employeeID).toString());
+        return new ResponseEntity<>(vibeRepository.findAllByEmployeeID(employeeID), HttpStatus.OK);
     }
     
 }
