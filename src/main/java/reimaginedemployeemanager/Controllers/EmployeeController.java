@@ -54,13 +54,13 @@ public class EmployeeController {
         Optional<Employee> updateEmploye = employeeRepository.findById(employee.getEmployeeID());
 		
         if (updateEmploye.isPresent()) {
-            if(employee.getEmail() != null || employee.getEmail() != "" || employee.getEmail().isBlank() != true)
+            if(employee.getEmail() != null && employee.getEmail() != "" && employee.getEmail().isBlank() != true)
                 updateEmploye.get().setEmail(employee.getEmail());
-            if(employee.getFirstName() != null || employee.getFirstName() != "" || employee.getFirstName().isBlank() != true)
+            if(employee.getFirstName() != null && employee.getFirstName() != "" && employee.getFirstName().isBlank() != true)
                 updateEmploye.get().setFirstName(employee.getFirstName());
-            if(employee.getLastName() != null || employee.getLastName() != "" || employee.getLastName().isBlank() != true)
+            if(employee.getLastName() != null && employee.getLastName() != "" && employee.getLastName().isBlank() != true)
                 updateEmploye.get().setLastName(employee.getLastName());
-            if(employee.getPassword() != null || employee.getPassword() != "" || employee.getPassword().isBlank() != true)
+            if(employee.getPassword() != null && employee.getPassword() != "" && employee.getPassword().isBlank() != true)
                 updateEmploye.get().setPassword(employee.getPassword());
             
             employee = updateEmploye.get();
