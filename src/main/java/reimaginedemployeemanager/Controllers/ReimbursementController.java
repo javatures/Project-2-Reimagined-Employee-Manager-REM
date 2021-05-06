@@ -62,4 +62,22 @@ public class ReimbursementController {
         return new ResponseEntity<>(reimbursementRepository.findByEmployeeID(employeeID), HttpStatus.OK);
 
     }
+
+    @RequestMapping(value="/approveReimbursement", 
+                    consumes=MediaType.APPLICATION_JSON_VALUE, 
+                    produces=MediaType.APPLICATION_JSON_VALUE, 
+                    method=RequestMethod.POST)
+    public void updateEmployeeManager(@RequestBody Reimbursement reimbursement) {
+        Optional<Reimbursement> updateReimbursement = reimbursementRepository.findById(reimbursement.getReimbursementID());
+
+        if (updateReimbursement.isPresent()) {
+            updateReimbursement.get().setApproved("true");
+            updateReimbursement.get().setApprovalDate(reimbursement.getApprovalDate());
+
+            reimbursement = updateReimbursement.get();
+
+            reimbursementRepository.save(reimbursement);
+        }
+
+    }
 }
