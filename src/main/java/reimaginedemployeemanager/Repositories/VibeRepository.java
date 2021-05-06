@@ -10,6 +10,6 @@ import reimaginedemployeemanager.Objects.Vibe;
 @Repository
 public interface VibeRepository extends JpaRepository<Vibe, Long> {
 
-    List<Vibe> findAllByEmployeeID(long employeeID);
+    List<Vibe> findAllByEmployeeID(long vibingEmployeeID);
     
 }
