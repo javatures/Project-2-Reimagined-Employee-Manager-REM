@@ -11,5 +11,6 @@ import reimaginedemployeemanager.Objects.Task;
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
     List<Task> findAllByEmployeeID(long employeeID);
+
     
 }

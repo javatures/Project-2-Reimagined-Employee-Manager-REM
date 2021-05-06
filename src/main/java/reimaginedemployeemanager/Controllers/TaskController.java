@@ -17,7 +17,7 @@ import java.util.Optional;
 import reimaginedemployeemanager.Objects.Task;
 import reimaginedemployeemanager.Repositories.TaskRepository;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class TaskController {
 
@@ -38,9 +38,9 @@ public class TaskController {
                     consumes = MediaType.APPLICATION_JSON_VALUE,
                     produces = MediaType.APPLICATION_JSON_VALUE,
                     method = RequestMethod.POST)
-    public void deleteTask (@RequestBody long taskID) {
+    public void deleteTask (@RequestBody Task task) {
 
-        taskRepository.deleteById(taskID);
+        taskRepository.deleteById(task.getTaskID());
 
     }
 
@@ -70,7 +70,6 @@ public class TaskController {
     @ResponseBody
     public ResponseEntity<List<Task>> listTasksByEmployee (long employeeID) {
 
-        System.out.println(taskRepository.findAllByEmployeeID(employeeID).toString());
         return new ResponseEntity<>(taskRepository.findAllByEmployeeID(employeeID), HttpStatus.OK);
 
     }
